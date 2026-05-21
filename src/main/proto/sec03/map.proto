@@ -5,9 +5,10 @@ option java_multiple_files = true;
 option java_package = "com.ayaz.models.sec03";
 
 enum  BodyStyle {
-  SEDAN=0;
-  COUPE=1;
-  SUV=2;
+  UNKNOWN = 0; // it start with 0 and it is used as default value
+  SEDAN=1;
+  COUPE=2;
+  SUV=3;
 }
 
 message  Car {
