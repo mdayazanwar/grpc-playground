@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package sec06;
+
+option java_multiple_files = true;
+option java_package = "com.ayaz.models.sec06";
+
+// Request
+message BalanceCheckRequest {
+  int32 account_number = 1;
+}
+
+
+// Response
+message AccountBalance {
+  int32 account_number = 1;
+  int32 balance = 2;
+}
+
+
+service BankService {
+  rpc GetAccountBalance(BalanceCheckRequest) returns (AccountBalance);
+}
