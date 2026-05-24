@@ -2,22 +2,26 @@ package sec06;
 
 import com.ayaz.common.GrpcServer;
 import com.ayaz.models.sec06.BankServiceGrpc;
+import com.ayaz.models.sec06.TransferServiceGrpc;
 import com.ayaz.sec06.BankService;
+import com.ayaz.sec06.TransferService;
 import common.AbstractChannelTest;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 
 public class AbstractTest extends AbstractChannelTest {
 
-    private final GrpcServer grpcServer = GrpcServer.create(new BankService());
-    protected BankServiceGrpc.BankServiceStub stub;
-    protected BankServiceGrpc.BankServiceBlockingStub blockingStub;
+    private final GrpcServer grpcServer = GrpcServer.create(new BankService(), new TransferService());
+    protected BankServiceGrpc.BankServiceStub bankStub;
+    protected BankServiceGrpc.BankServiceBlockingStub bankBlockingStub;
+    protected TransferServiceGrpc.TransferServiceStub transferStub;
 
     @BeforeAll
     public void setup() {
         this.grpcServer.start();
-        this.stub = BankServiceGrpc.newStub(channel);
-        this.blockingStub = BankServiceGrpc.newBlockingStub(channel);
+        this.bankStub = BankServiceGrpc.newStub(channel);
+        this.bankBlockingStub = BankServiceGrpc.newBlockingStub(channel);
+        this.transferStub = TransferServiceGrpc.newStub(channel);
     }
 
     @AfterAll

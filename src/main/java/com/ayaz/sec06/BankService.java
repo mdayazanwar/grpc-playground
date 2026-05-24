@@ -49,11 +49,11 @@ public class BankService extends BankServiceGrpc.BankServiceImplBase {
     @Override
     public void withdraw(WithdrawRequest request, StreamObserver<Money> responseObserver) {
 
-        var accountnumber = request.getAccountNumber();
+        var accountNumber = request.getAccountNumber();
         var requestedAmount = request.getAmount();
-        var accountBalance = AccountRepository.getBalance(accountnumber);
+        var accountBalance = AccountRepository.getBalance(accountNumber);
 
-        if(requestedAmount > accountnumber) {
+        if(requestedAmount > accountBalance) {
             responseObserver.onCompleted();
             return;
         }
@@ -62,7 +62,7 @@ public class BankService extends BankServiceGrpc.BankServiceImplBase {
             var money =  Money.newBuilder().setAmount(10).build();
             responseObserver.onNext(money);
             log.info("Money sent {}", money);
-            AccountRepository.deductAmount(accountnumber, 10);
+            AccountRepository.deductAmount(accountNumber, 10);
             Uninterruptibles.sleepUninterruptibly(1, TimeUnit.SECONDS);
         }
 
@@ -75,4 +75,6 @@ public class BankService extends BankServiceGrpc.BankServiceImplBase {
     public StreamObserver<DepositRequest> deposit(StreamObserver<AccountBalance> responseObserver) {
         return new DepositRequestHandler(responseObserver);
     }
+
+
 }
