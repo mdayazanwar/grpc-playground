@@ -1,4 +1,4 @@
-package sec11.repository;
+package com.ayaz.sec11.repository;
 
 import java.util.Collections;
 import java.util.Map;
