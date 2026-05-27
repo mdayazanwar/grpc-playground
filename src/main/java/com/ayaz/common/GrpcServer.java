@@ -1,24 +1,13 @@
 package com.ayaz.common;
 
-import com.ayaz.sec06.BankService;
 import io.grpc.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class GrpcServer {
-    /*public static void main(String[] args) throws IOException, InterruptedException {
-       var server = ServerBuilder.forPort(6565)
-                .addService(new BankService())
-                .build();
-
-       server.start();
-       server.awaitTermination();
-
-    }*/
 
     private static  final Logger log = LoggerFactory.getLogger(GrpcServer.class);
     private  final Server server;
